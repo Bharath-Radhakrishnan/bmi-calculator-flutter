@@ -7,6 +7,19 @@ import 'reusable_icon.dart';
 const bottomContainerHeight = 80.0;
 const bottomContainerColor = Color(0xFFEB1555);
 const activeCardColor = Color(0xFF1D1E33);
+const inActiveCardColor = Colors.red;
+Color maleCardColor = inActiveCardColor;
+Color femaleCardColor = inActiveCardColor;
+enum gender { Male, Female }
+void updateColor(gender g) {
+  if (g == gender.Male) {
+    maleCardColor = activeCardColor;
+    femaleCardColor = inActiveCardColor;
+  } else if (g == gender.Female) {
+    femaleCardColor = activeCardColor;
+    maleCardColor = inActiveCardColor;
+  }
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -26,18 +39,38 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                ReusableCard(
-                  containerColor: activeCardColor,
-                  cardChild: ReusableIcon(
-                    icon: FontAwesomeIcons.mars,
-                    label: 'MALE',
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        print('Male');
+                        updateColor(gender.Male);
+                      });
+                    },
+                    child: ReusableCard(
+                      containerColor: maleCardColor,
+                      cardChild: ReusableIcon(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MALE',
+                      ),
+                    ),
                   ),
                 ),
-                ReusableCard(
-                  containerColor: activeCardColor,
-                  cardChild: ReusableIcon(
-                    icon: FontAwesomeIcons.venus,
-                    label: 'FEMALE',
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        print('Female');
+                        updateColor(gender.Female);
+                      });
+                    },
+                    child: ReusableCard(
+                      containerColor: femaleCardColor,
+                      cardChild: ReusableIcon(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -47,7 +80,7 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                ReusableCard(containerColor: activeCardColor),
+                Expanded(child: ReusableCard(containerColor: activeCardColor)),
               ],
             ),
           ),
@@ -55,8 +88,8 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                ReusableCard(containerColor: activeCardColor),
-                ReusableCard(containerColor: activeCardColor),
+                Expanded(child: ReusableCard(containerColor: activeCardColor)),
+                Expanded(child: ReusableCard(containerColor: activeCardColor)),
               ],
             ),
           ),
