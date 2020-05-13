@@ -7,19 +7,10 @@ import 'reusable_icon.dart';
 const bottomContainerHeight = 80.0;
 const bottomContainerColor = Color(0xFFEB1555);
 const activeCardColor = Color(0xFF1D1E33);
-const inActiveCardColor = Colors.red;
-Color maleCardColor = inActiveCardColor;
-Color femaleCardColor = inActiveCardColor;
+const inActiveCardColor = Color(0xFF1111328);
+
 enum gender { Male, Female }
-void updateColor(gender g) {
-  if (g == gender.Male) {
-    maleCardColor = activeCardColor;
-    femaleCardColor = inActiveCardColor;
-  } else if (g == gender.Female) {
-    femaleCardColor = activeCardColor;
-    maleCardColor = inActiveCardColor;
-  }
-}
+gender selectedGender;
 
 class InputPage extends StatefulWidget {
   @override
@@ -44,11 +35,13 @@ class _InputPageState extends State<InputPage> {
                     onTap: () {
                       setState(() {
                         print('Male');
-                        updateColor(gender.Male);
+                        selectedGender = gender.Male;
                       });
                     },
                     child: ReusableCard(
-                      containerColor: maleCardColor,
+                      containerColor: (selectedGender == gender.Male
+                          ? activeCardColor
+                          : inActiveCardColor),
                       cardChild: ReusableIcon(
                         icon: FontAwesomeIcons.mars,
                         label: 'MALE',
@@ -61,11 +54,13 @@ class _InputPageState extends State<InputPage> {
                     onTap: () {
                       setState(() {
                         print('Female');
-                        updateColor(gender.Female);
+                        selectedGender = gender.Female;
                       });
                     },
                     child: ReusableCard(
-                      containerColor: femaleCardColor,
+                      containerColor: (selectedGender == gender.Female
+                          ? activeCardColor
+                          : inActiveCardColor),
                       cardChild: ReusableIcon(
                         icon: FontAwesomeIcons.venus,
                         label: 'FEMALE',
