@@ -26,44 +26,16 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 ReusableCard(
                   containerColor: activeCardColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.mars,
-                        size: 80.0,
-                      ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      Text(
-                        'Male',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ],
+                  cardChild: ReusableIcon(
+                    icon: FontAwesomeIcons.mars,
+                    label: 'MALE',
                   ),
                 ),
                 ReusableCard(
                   containerColor: activeCardColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.venus,
-                        size: 80.0,
-                      ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      Text(
-                        'Female',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ],
+                  cardChild: ReusableIcon(
+                    icon: FontAwesomeIcons.venus,
+                    label: 'FEMALE',
                   ),
                 ),
               ],
@@ -93,6 +65,34 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
+    );
+  }
+}
+
+class ReusableIcon extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  const ReusableIcon({this.icon, this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          icon,
+          size: 80.0,
+        ),
+        SizedBox(
+          height: 15.0,
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 20.0,
+          ),
+        ),
+      ],
     );
   }
 }
